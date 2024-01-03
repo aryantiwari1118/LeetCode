@@ -1,31 +1,16 @@
 class Solution {
 public:
-    int numberOfBeams(vector<string>& bank) 
-    {        
-        ios_base::sync_with_stdio(false);
-        cin.tie(NULL);
-
-        if(bank.size() < 2)
-            return 0;
-
-        int solution = 0;
-        short beaconsInPrevRow = 0;
-        short beaconsInCurrentRow = 0;
-        for(size_t i = 0; i < bank.size(); ++i)
+    int numberOfBeams(vector<string>& bank) {
+        int n=bank.size(),ans=0;
+        int first=count(bank[0].begin(),bank[0].end(),'1');
+        for(int i=1;i<n;i++)
         {
-            beaconsInCurrentRow = 0;
-
-            for(auto &it : bank[i])
-            {
-                if(it == '1')
-                {
-                    beaconsInCurrentRow++;
-                }
+            int second=count(bank[i].begin(),bank[i].end(),'1');
+            ans=ans+first*second;
+            if (second != 0) {
+                first = second;
             }
-            solution += beaconsInCurrentRow * beaconsInPrevRow;
-            beaconsInPrevRow = (beaconsInCurrentRow == 0) * beaconsInPrevRow + beaconsInCurrentRow;
         }
-
-        return solution;
+        return ans;
     }
 };
