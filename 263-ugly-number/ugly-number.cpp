@@ -14,7 +14,10 @@ public:
             n = n / 5;
         }
 
+        if(n==1){
+            return true;
+        }
         
-        return n == 1;
+        return false;
     }
 };
